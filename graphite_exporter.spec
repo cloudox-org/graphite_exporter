@@ -53,8 +53,6 @@ exit 0
 %{_bindir}/%{name}
 %config(noreplace) %{_sysconfdir}/default/%{name}
 %dir %attr(755, %{user}, %{group}) %{_sharedstatedir}/prometheus
-%if 0%{?el5}
-%{_initrdddir}/%{name}
 %{_unitdir}/%{name}.service
 
 %changelog
