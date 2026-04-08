@@ -2,14 +2,14 @@
 %global user prometheus
 %global group prometheus
 
-Name: artifactory_exporter
-Version: 1.16.1
+Name: graphite_exporter
+Version: 0.16.0
 Release: 1%{?dist}
-Summary: Prometheus exporter for JFrog Artifactory stats.
+Summary: Server that accepts metrics via the Graphite protocol and exports them as Prometheus metrics.
 License: ASL 2.0
-URL:     https://github.com/peimanja/artifactory_exporter
+URL:     https://github.com/prometheus/graphite_exporter
 
-Source0: https://github.com/peimanja/artifactory_exporter/releases/download/v%{version}/%{name}-v%{version}-linux-amd64.tar.gz
+Source0: https://github.com/prometheus/graphite_exporter/releases/download/v%{version}/%{name}-%{version}.linux-amd64.tar.gz
 Source1: %{name}.unit
 Source2: %{name}.default
 
@@ -17,10 +17,12 @@ Source2: %{name}.default
 Requires(pre): shadow-utils
 
 %description
-Collects metrics about an Artifactory system
+An exporter for metrics exported in the Graphite plaintext protocol. It
+accepts data over both TCP and UDP, and transforms and exposes them for
+consumption by Prometheus.
 
 %prep
-%setup -q -D -c %{name}-v%{version}-linux-amd64
+%setup -q -n %{name}-%{version}.linux-amd64
 
 %build
 /bin/true
@@ -51,8 +53,10 @@ exit 0
 %{_bindir}/%{name}
 %config(noreplace) %{_sysconfdir}/default/%{name}
 %dir %attr(755, %{user}, %{group}) %{_sharedstatedir}/prometheus
+%if 0%{?el5}
+%{_initrdddir}/%{name}
 %{_unitdir}/%{name}.service
 
 %changelog
-* Thu Apr 02 2026 Ivan Garcia <igarcia@cloudox.org> - 1.16.1
-- Initial packaging for the 1.16.1 branch
+* Wed Apr 08 2026 Ivan Garcia <igarcia@cloudox.org> - 0.16.0
+- Initial packaging for the 0.16.0 branch
