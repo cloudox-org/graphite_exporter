@@ -3,7 +3,7 @@
 %global group prometheus
 
 Name: graphite_exporter
-Version: 0.16.0
+Version: 0.17.0
 Release: 1%{?dist}
 Summary: Server that accepts metrics via the Graphite protocol and exports them as Prometheus metrics.
 License: ASL 2.0
@@ -56,5 +56,7 @@ exit 0
 %{_unitdir}/%{name}.service
 
 %changelog
+* Thu Aug 06 2026 Ivan Garcia <igarcia@cloudox.org> - 0.17.0
+- Initial packaging for the 0.17.0 branch
 * Wed Apr 08 2026 Ivan Garcia <igarcia@cloudox.org> - 0.16.0
 - Initial packaging for the 0.16.0 branch
